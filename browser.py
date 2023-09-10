@@ -1,9 +1,13 @@
+import time
+
 from selenium.common import NoSuchElementException
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.options import Options
 import pytest
 from selenium import webdriver
 from chromedriver_py import binary_path
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 
 
 class Browser:
@@ -14,6 +18,7 @@ class Browser:
         service = Service(executable_path=binary_path)
         driver = webdriver.Chrome(service=service, options=options)
         driver.implicitly_wait(10)
+
         self.browser = driver
         self.url = url
         self.browser.implicitly_wait(timeout)
@@ -42,15 +47,26 @@ class Browser:
             return False
         return elements
 
-    def scroll_element_to_bottom(self, element):
-        current_height = self.execute_script("return arguments[0].scrollHeight;", element)
+    def scroll_element_to_bottom(self):
+
+        previous_page_height = self.browser.execute_script("return document.body.scrollHeight")
 
         while True:
-            self.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
-            self.implicitly_wait(3)  # Ждем некоторое время для загрузки контента внутри элемента
+            # Прокручиваем страницу до конца
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-            new_height = self.execute_script("return arguments[0].scrollHeight;", element)
-            if new_height == current_height:
+            # Ждем некоторое время (можно настроить под свои нужды)
+            time.sleep(2)
+
+            # Получаем текущую высоту страницы
+            current_page_height = self.browser.execute_script("return document.body.scrollHeight")
+
+            # Если высота изменилась, это может указывать на обновление контента
+            if current_page_height > previous_page_height:
+                print("Контент обновился. Продолжаем прокручивать страницу.")
+                previous_page_height = current_page_height
+            else:
+                print("Контент больше не обновляется. Завершаем скрипт.")
+                time.sleep(2)
                 break
 
-            current_height = new_height
