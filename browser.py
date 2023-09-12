@@ -1,20 +1,17 @@
-import time
-
+import time, os
 from selenium.common import NoSuchElementException
-from selenium.webdriver import Keys
-from selenium.webdriver.chrome.options import Options
-import pytest
 from selenium import webdriver
+import chromedriver_autoinstaller
 from chromedriver_py import binary_path
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 
 
 class Browser:
 
     def __init__(self, url, timeout=10):
         options = webdriver.ChromeOptions()
-        options.add_argument("user-data-dir=C:\\Users\\Yuri\\AppData\\Local\\Google\\Chrome\\User Data")
+        user_name = os.getlogin()
+        options.add_argument(f"user-data-dir=C:\\Users\\{user_name}\\AppData\\Local\\Google\\Chrome\\User Data")
         service = Service(executable_path=binary_path)
         driver = webdriver.Chrome(service=service, options=options)
         driver.implicitly_wait(10)
@@ -69,4 +66,3 @@ class Browser:
                 print("Контент больше не обновляется. Завершаем скрипт.")
                 time.sleep(2)
                 break
-
