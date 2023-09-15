@@ -1,7 +1,6 @@
 import time, os
 from selenium.common import NoSuchElementException
 from selenium import webdriver
-import chromedriver_autoinstaller
 from chromedriver_py import binary_path
 from selenium.webdriver.chrome.service import Service
 
