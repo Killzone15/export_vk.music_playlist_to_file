@@ -11,6 +11,7 @@ class Browser:
         options = webdriver.ChromeOptions()
         user_name = os.getlogin()
         options.add_argument(f"user-data-dir=C:\\Users\\{user_name}\\AppData\\Local\\Google\\Chrome\\User Data")
+        options.add_argument("--headless")
         service = Service(executable_path=binary_path)
         driver = webdriver.Chrome(service=service, options=options)
         driver.implicitly_wait(10)
