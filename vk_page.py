@@ -4,7 +4,7 @@ from browser import Browser
 AUDIO_LIST_BLOCK = (By.CSS_SELECTOR, '.audio_page__audio_list_block')
 SONG_PERFORMER = (By.CSS_SELECTOR, '.audio_page__audio_list_block .audio_row__performers a')
 SONG_NAME = (By.CSS_SELECTOR, '.audio_page__audio_list_block .audio_row__title._audio_row__title a')
-SONG_BLOCK = (By.CSS_SELECTOR, '.audio_row__inner')
+SONG_BLOCK = (By.CSS_SELECTOR, '.audio_page__audio_list_block .audio_row__inner')
 
 
 class VkPage:
