@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 import threading
-from tqdm import tqdm
 from browser import Browser
 from vk_page import VkPage
 
@@ -13,7 +12,9 @@ class VKMusicExporter:
         self.root = root
         self.root.title("Экспорт музыки из VK в файл txt")
 
-        self.label = tk.Label(root, text="Введите ссылку на страницу VK:")
+        self.label = tk.Label(root, text="Введите ссылку на плейлист VK:", bg='#424242',
+                              font=("Trebuchet Ms", 15, 'bold'),
+                              fg='#e1e3e6')
         self.label.grid(row=0, column=0, padx=10, pady=10)
 
         self.link_entry = tk.Entry(root, width=50)
@@ -30,22 +31,20 @@ class VKMusicExporter:
         self.root.grid_rowconfigure(1, weight=1)  # Разрешаем растягивание строки с полем ввода
 
         self.root.minsize(650, 500)
+        self.root.configure(bg="#424242")
 
     def export_music(self):
         # Получите ссылку из поля ввода
         vk_link = self.link_entry.get()
 
-        # Откройте VK и выполните необходимые действия
         driver = Browser(vk_link)
         driver.open()
-
         page = VkPage(driver)
         page.check_music_page()
         page.scroll_audio_block_vk_page_to_bottom()
         page.create_music_list_from_vk_music_page()
 
         messagebox.showinfo("Готово", "Музыка была успешно экспортирована в файл vk_playlist.txt")
-
 
 
 def create_window():
