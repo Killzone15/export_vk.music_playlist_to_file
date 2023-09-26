@@ -37,3 +37,29 @@ if __name__ == '__main__':
 ```
 ## Интерфейс (GUI)
 ![Иллюстрация к проекту](GUI_export_vkmusic.png)
+
+## Запуск
+
+### Запуск через терминал:
+1. Клонировать и открыть проект.
+```
+git clone https://github.com/Killzone15/export_vk.music_playlist_to_file.git
+```
+```
+cd export_vk.music_playlist_to_file
+```
+2. Создать и войти в виртуальное окружение.
+```
+pipenv --python 3.11
+```
+```
+pipenv shell
+```
+3. Установить модули из requirements.txt.
+```
+pip install -r requirements.txt
+```
+4. Запустить скрипт main.py
+```
+python main.py
+```
