@@ -52,7 +52,7 @@ class Browser:
             # Прокручиваем страницу до конца
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-            # Ждем некоторое время (можно настроить под свои нужды)
+            # Ждем некоторое время
             time.sleep(2)
 
             # Получаем текущую высоту страницы
