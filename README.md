@@ -1,1 +1,1 @@
-# export_vk.music_to_yandex.music
+# Экспорт списка песен из плейлиста vk.ru в фаил .txt при помощи Selenium и Python
