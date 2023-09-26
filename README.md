@@ -35,3 +35,5 @@ from window import create_window
 if __name__ == '__main__':
     create_window()
 ```
+## Интерфейс (GUI)
+![Иллюстрация к проекту](GUI_export_vkmusic.png)
